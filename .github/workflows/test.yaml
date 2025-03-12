@@ -1,0 +1,17 @@
+name: newworkflow
+on: push
+env:
+    WF_VAR: 'Variable at workflow level'
+jobs:
+    job1:
+        runs-on: ubuntu-latest
+        steps:
+           - name: step job
+             env:
+                STEP_VAR: 'Variable at step level'
+             run: |
+               echo "Hello World"
+               echo "Printing step level variable:::: ${{env.STEP_VAR }}"
+               echo "Printing workflow level variable::: ${{env.WF_VAR}}"
+
+  
