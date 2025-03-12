@@ -1,0 +1,8 @@
+name: newworkflow
+on: push
+jobs:
+    job1:
+        runs-on: ubuntu-latest
+        steps:
+           - name: step job
+             run: echo "Hello World"
