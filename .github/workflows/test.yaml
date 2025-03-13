@@ -9,20 +9,31 @@ on:
           - qa
           - stage
           - prod
+        default: dev  
 jobs:
-    Build-Job:
+    Test-Job:
         runs-on: ubuntu-latest
         steps:
+          - name: Print GITHUB-OUTPUT value
+            run: echo "{{ GITHUB_OUTPUT }}
+    Build-Job:
+        runs-on: ubuntu-latest
+        outputs: 
+          job_output: ${{ steps.build_job.outputs.environment }}
+        steps:
            - name: Build Step
+             id: build_job
              run: |
                echo "Build Job executing"
+               echo "setting out to github_output file below:::::"
+               echo "environment=${{inputs.environment-name}}>> ${{ GITHUB_OUTPUT }}
     Deploy-Job:
        runs-on: ubuntu-latest
        needs: Build-Job
        steps:
          - name: Deploy Step
            run: |
-               echo "Deploying the code to ${{ inputs.environment-name }}"
+               echo "Deploying the code to ${{ needs.Build-Job.outputs.job_output }}"
                
                
 
