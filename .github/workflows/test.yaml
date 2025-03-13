@@ -1,17 +1,28 @@
 name: newworkflow
-on: push
-env:
-    WF_VAR: 'Variable at workflow level'
+on: 
+  workflow_dispatch:
+    inputs:
+      environment-name:
+        type: choice
+        options:
+          - dev
+          - qa
+          - stage
+          - prod
 jobs:
-    job1:
+    Build-Job:
         runs-on: ubuntu-latest
         steps:
-           - name: step job
-             env:
-                STEP_VAR: 'Variable at step level'
+           - name: Build Step
              run: |
-               echo "Hello World"
-               echo "Printing step level variable:::: ${{env.STEP_VAR }}"
-               echo "Printing workflow level variable::: ${{env.WF_VAR}}"
+               echo "Build Job executing"
+    Deploy-Job:
+       runs-on: ubuntu-latest
+       steps:
+         - name: Deploy Step
+           run: |
+               echo "Deploying the code to ${{ inputs.environment-name }}
+               
+               
 
   
