@@ -15,7 +15,7 @@ jobs:
         runs-on: ubuntu-latest
         steps:
           - name: Print GITHUB-OUTPUT value
-            run: echo "{{ GITHUB_OUTPUT }}
+            run: echo "$GITHUB_OUTPUT"
     Build-Job:
         runs-on: ubuntu-latest
         outputs: 
@@ -26,7 +26,7 @@ jobs:
              run: |
                echo "Build Job executing"
                echo "setting out to github_output file below:::::"
-               echo "environment=${{inputs.environment-name}}>> ${{ GITHUB_OUTPUT }}"
+               echo "environment=${{inputs.environment-name}}" >> "$GITHUB_OUTPUT"
     Deploy-Job:
        runs-on: ubuntu-latest
        needs: Build-Job
